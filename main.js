@@ -1,0 +1,166 @@
+/* =================================================================
+   MULTISPECT · CIVIC BAROMETER — main.js
+   Vanilla JS only. Three behaviours:
+     1. Scroll reveal (IntersectionObserver)
+     2. Sticky nav: mobile menu + scroll-spy active link + smooth scroll
+     3. Dynamic background that travels the spectrum as you scroll
+   All motion is disabled under prefers-reduced-motion.
+   ================================================================= */
+(function () {
+  "use strict";
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------------------------------------------------------------
+     BACKGROUND TONES — one per section id.
+     The palette is cool/civic & light at the top, deepens to a
+     darker warm "security edge" around the Barometer and Case
+     Studies, then resolves back to a calm civic tone at the close.
+     Retune freely; keys must match each <section id="…">.
+  --------------------------------------------------------------- */
+  var TONES = {
+    hero:       "#eef3f4", // cool civic, light
+    spectrum:   "#eaf1f1",
+    summary:    "#e6eded",
+    challenge:  "#e2eb ea".replace(" ", ""), // (guard against typos)
+    quote:      "#1b2a30", // dark calm accent band
+    depth:      "#e9ede9",
+    stack:      "#edeae2", // warming paper
+    polygon:    "#ece6dc",
+    deepdive:   "#ece2d5", // warm sand
+    barometer:  "#16110d", // DARKEST + WARMEST — the security edge
+    delivery:   "#ece3d8", // easing back up
+    platform:   "#ece6dd",
+    why:        "#ede3d4",
+    cases:      "#171210", // second dark/warm zone
+    about:      "#e9e7df", // resolving to neutral civic
+    principles: "#e8edec",
+    contact:    "#ecf2f1"  // calm, optimistic civic close
+  };
+  // normalise the guarded value
+  TONES.challenge = "#e2ebea";
+
+  /* ===============================================================
+     1 · SCROLL REVEAL
+  =============================================================== */
+  var reveals = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
+
+  // stagger grouped children for a gentle cascade
+  document.querySelectorAll(".cols, .bands, .altitudes, .diffs, .principles, .pillars, .benefits").forEach(function (group) {
+    group.querySelectorAll("[data-reveal]").forEach(function (el, i) {
+      el.style.setProperty("--stagger", i);
+    });
+  });
+
+  if (reduceMotion) {
+    reveals.forEach(function (el) { el.classList.add("is-in"); });
+  } else if ("IntersectionObserver" in window) {
+    var revealObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add("is-in");
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
+    reveals.forEach(function (el) { revealObs.observe(el); });
+  } else {
+    // very old browsers: just show everything
+    reveals.forEach(function (el) { el.classList.add("is-in"); });
+  }
+
+  /* ===============================================================
+     2 · STICKY NAV
+  =============================================================== */
+  var toggle = document.getElementById("navToggle");
+  var menu = document.getElementById("navMenu");
+
+  // --- mobile menu open/close ---
+  function closeMenu() {
+    menu.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open menu");
+  }
+  if (toggle && menu) {
+    toggle.addEventListener("click", function () {
+      var open = menu.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+    // close after choosing a destination
+    menu.addEventListener("click", function (e) {
+      if (e.target.closest("a")) closeMenu();
+    });
+    // close on Escape
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeMenu();
+    });
+  }
+
+  // --- scroll-spy: highlight the nav link of the section in view ---
+  var spyLinks = Array.prototype.slice.call(document.querySelectorAll("[data-spy]"));
+  var linkById = {};
+  var spySections = [];
+  spyLinks.forEach(function (a) {
+    var id = a.getAttribute("href").slice(1);
+    var sec = document.getElementById(id);
+    if (sec) { linkById[id] = a; spySections.push(sec); }
+  });
+
+  function setActive(id) {
+    spyLinks.forEach(function (a) { a.classList.remove("is-active"); });
+    if (linkById[id]) linkById[id].classList.add("is-active");
+  }
+
+  if ("IntersectionObserver" in window && spySections.length) {
+    var spyObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) setActive(e.target.id);
+      });
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+    spySections.forEach(function (s) { spyObs.observe(s); });
+  }
+
+  /* ===============================================================
+     3 · DYNAMIC BACKGROUND — travels the spectrum on scroll
+     The active section is the one currently sitting at the TOP of the
+     viewport (just under the sticky nav). That section's theme is what
+     fills the screen, so its tone always matches the visible text —
+     correct even for sections taller than the viewport (e.g. the long
+     Case Studies block). CSS transitions #bg-layer smoothly between
+     tones; the transition is disabled under prefers-reduced-motion.
+  =============================================================== */
+  var bgLayer = document.getElementById("bg-layer");
+  var allSections = Array.prototype.slice.call(document.querySelectorAll(".section[data-tone]"));
+  var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h"), 10) || 60;
+
+  if (bgLayer && allSections.length) {
+    var activeTone = null;
+
+    function pickActiveTone() {
+      var line = navH + 2; // just below the sticky nav
+      var current = allSections[0];
+      for (var i = 0; i < allSections.length; i++) {
+        var r = allSections[i].getBoundingClientRect();
+        if (r.top <= line && r.bottom > line) { current = allSections[i]; break; }
+        if (r.top > line) break; // sections are in document order
+      }
+      var tone = TONES[current.id];
+      if (tone && tone !== activeTone) {
+        activeTone = tone;
+        bgLayer.style.backgroundColor = tone;
+      }
+    }
+
+    // rAF-throttled scroll handler (GPU-cheap: reads rects, sets one colour)
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () { pickActiveTone(); ticking = false; });
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    pickActiveTone(); // correct colour on first paint
+  }
+})();

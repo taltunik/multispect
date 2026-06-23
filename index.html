@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================= -->
+  <!-- SEO / SOCIAL                                                    -->
+  <!-- ============================================================= -->
+  <title>Civic Barometer — Multispect Solutions | A Cultural-Regional House of Expertise</title>
+  <meta name="description" content="Multispect reads communities across the full spectrum — from cultural and civic life to the security edge — and tells you where tension or change is moving. A cultural-regional house of expertise, not a platform." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Civic Barometer — Multispect Solutions" />
+  <meta property="og:description" content="Understanding the current before it becomes a wave. Reading communities across the full spectrum, from cultural and civic life to the security edge." />
+  <meta property="og:site_name" content="Multispect Solutions" />
+  <!-- Drop a 1200×630 share image at assets/img/og-cover.jpg and the line below activates it -->
+  <meta property="og:image" content="assets/img/og-cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Dynamic background layer — its colour travels the spectrum as you scroll (set by main.js) -->
+  <div id="bg-layer" aria-hidden="true">
+    <div id="bg-gradient" aria-hidden="true"></div>
+  </div>
+
+  <!-- Skip link for keyboard users -->
+  <a class="skip-link" href="#hero">Skip to content</a>
+
+  <!-- ============================================================= -->
+  <!-- STICKY NAV / TABLE OF CONTENTS                                  -->
+  <!-- ============================================================= -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="nav__brand" href="#hero" aria-label="Multispect Solutions — home">
+        <span class="nav__mark">Multi<span class="nav__mark-dot">·</span>Spect</span>
+        <span class="nav__tag">Solutions</span>
+      </a>
+
+      <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav__menu" id="navMenu" aria-label="Sections">
+        <ul>
+          <li><a href="#spectrum" data-spy>The Spectrum</a></li>
+          <li><a href="#summary" data-spy>In Depth</a></li>
+          <li><a href="#challenge" data-spy>The Challenge</a></li>
+          <li><a href="#stack" data-spy>The Stack</a></li>
+          <li><a href="#barometer" data-spy>The Barometer</a></li>
+          <li><a href="#why" data-spy>Why Us</a></li>
+          <li><a href="#cases" data-spy>Case Studies</a></li>
+          <li><a href="#about" data-spy>About</a></li>
+          <li><a href="#contact" data-spy class="nav__cta">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ========================================================= -->
+    <!-- 1 · HERO                                                    -->
+    <!-- ========================================================= -->
+    <section id="hero" class="section section--hero theme-light" data-tone="hero">
+      <div class="wrap hero">
+        <div class="hero__copy">
+          <p class="kicker" data-reveal>A Full-Spectrum Civic-Intelligence Engagement</p>
+          <h1 class="hero__title" data-reveal>Civic Barometer</h1>
+          <p class="hero__lede" data-reveal>Understanding the current before it becomes a wave.</p>
+          <p class="hero__sub" data-reveal>Reading communities across the full spectrum — from cultural and civic life to the security edge.</p>
+
+          <dl class="hero__meta" data-reveal>
+            <div><dt>Domain</dt><dd>OSINT · Civic Discourse</dd></div>
+            <div><dt>Audience</dt><dd>Government &amp; Policy · Municipal · Philanthropy · Research · Internal Security</dd></div>
+          </dl>
+        </div>
+
+        <!-- Polygon-on-spectrum motif (crisp SVG) -->
+        <figure class="hero__motif" data-reveal aria-labelledby="motifcap">
+          <svg viewBox="0 0 460 360" role="img" aria-label="A geofenced polygon outline resting on the civic-to-security spectrum" class="motif-svg">
+            <defs>
+              <linearGradient id="specGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0"    stop-color="var(--spec-1)" />
+                <stop offset="0.25" stop-color="var(--spec-2)" />
+                <stop offset="0.5"  stop-color="var(--spec-3)" />
+                <stop offset="0.75" stop-color="var(--spec-4)" />
+                <stop offset="1"    stop-color="var(--spec-5)" />
+              </linearGradient>
+            </defs>
+            <!-- spectrum baseline -->
+            <rect x="30" y="300" width="400" height="6" rx="3" fill="url(#specGrad)" />
+            <g class="motif-nodes" fill="var(--bg-layer-fg, #fff)" stroke="url(#specGrad)" stroke-width="2">
+              <circle cx="30"  cy="303" r="5" /><circle cx="130" cy="303" r="5" />
+              <circle cx="230" cy="303" r="5" /><circle cx="330" cy="303" r="5" />
+              <circle cx="430" cy="303" r="5" />
+            </g>
+            <!-- geofenced polygon outline (the AOR) -->
+            <polygon class="motif-poly" points="120,70 250,40 360,110 340,210 220,250 100,190"
+              fill="none" stroke="var(--spec-2)" stroke-width="2" stroke-linejoin="round" />
+            <polygon class="motif-poly-fill" points="120,70 250,40 360,110 340,210 220,250 100,190"
+              fill="var(--spec-2)" opacity="0.06" />
+            <!-- vertex nodes -->
+            <g fill="var(--spec-2)">
+              <circle cx="120" cy="70" r="4" /><circle cx="250" cy="40" r="4" />
+              <circle cx="360" cy="110" r="4" /><circle cx="340" cy="210" r="4" />
+              <circle cx="220" cy="250" r="4" /><circle cx="100" cy="190" r="4" />
+            </g>
+            <!-- the "current" marker dropping onto the spectrum -->
+            <line x1="230" y1="250" x2="230" y2="300" stroke="var(--spec-4)" stroke-width="2" stroke-dasharray="3 4" />
+            <circle cx="230" cy="303" r="7" fill="var(--spec-4)" />
+          </svg>
+          <figcaption id="motifcap">Polygon / AOR-01 — the brand mark sits on the spectrum · Illustrative</figcaption>
+        </figure>
+      </div>
+
+      <p class="hero__premise" data-reveal>
+        <span class="quote-glyph" aria-hidden="true">“</span>We build a digital twin of the community’s social structure within a defined territory.<span class="quote-attr">— The Operating Premise</span>
+      </p>
+
+      <div class="scroll-cue" aria-hidden="true" data-reveal><span>Scroll</span><i></i></div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 2 · THE SPECTRUM                                            -->
+    <!-- ========================================================= -->
+    <section id="spectrum" class="section theme-light" data-tone="spectrum">
+      <div class="wrap">
+        <p class="kicker" data-reveal>Concept · The Spectrum</p>
+        <h2 class="section__title" data-reveal>We read communities across the full spectrum.</h2>
+        <p class="section__lede" data-reveal>And we tell you where on it tension — or change — is moving. Security is not the centre of the instrument. It is the far end of a scale that begins in the cultural and civic life of a place.</p>
+
+        <!-- Recurring spectrum bar component -->
+        <div class="spectrum-bar" data-reveal aria-hidden="true">
+          <div class="spectrum-bar__track"></div>
+          <div class="spectrum-bar__nodes">
+            <span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span><span style="--i:4"></span>
+          </div>
+        </div>
+
+        <ol class="bands">
+          <li class="band" data-reveal style="--band:var(--spec-1)">
+            <span class="band__no">01</span>
+            <h3 class="band__name">Cultural · Religious</h3>
+            <p>Identity, faith, language, memory — the deep grammar of a community.</p>
+          </li>
+          <li class="band" data-reveal style="--band:var(--spec-2)">
+            <span class="band__no">02</span>
+            <h3 class="band__name">Social · Civic</h3>
+            <p>Cohesion, trust, services and everyday civic mood.</p>
+          </li>
+          <li class="band" data-reveal style="--band:var(--spec-3)">
+            <span class="band__no">03</span>
+            <h3 class="band__name">Economic</h3>
+            <p>Grievance, opportunity, livelihoods and who feels left behind.</p>
+          </li>
+          <li class="band" data-reveal style="--band:var(--spec-4)">
+            <span class="band__no">04</span>
+            <h3 class="band__name">Political</h3>
+            <p>Representation, mobilisation, dissent and contested decisions.</p>
+          </li>
+          <li class="band" data-reveal style="--band:var(--spec-5)">
+            <span class="band__no">05</span>
+            <h3 class="band__name">Security</h3>
+            <p>Incitement, public order and threat — the extreme edge, not the centre.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 3 · UNDERSTANDING COMMUNITIES IN DEPTH (Exec Summary)       -->
+    <!-- ========================================================= -->
+    <section id="summary" class="section theme-light" data-tone="summary">
+      <div class="wrap">
+        <p class="kicker" data-reveal>§ I · Executive Summary</p>
+        <h2 class="section__title" data-reveal>Understanding communities in depth.</h2>
+        <p class="section__lede" data-reveal>Communities change in ways that rarely surface in headlines. Sentiment shifts, trust erodes, grievance gathers — and only at the far edge does any of it become unrest.</p>
+
+        <div class="cols cols--2">
+          <div class="col" data-reveal>
+            <div class="stat">
+              <span class="stat__num">Hours</span>
+              <p class="stat__cap">— sometimes days — between mobilisation taking shape and a public-order event. At the security edge, that gap is what early warning fills. It is one use of the instrument, not its limit.</p>
+            </div>
+          </div>
+          <div class="col" data-reveal>
+            <h3 class="eyebrow">The Operating Thesis</h3>
+            <p>For governments, municipalities, philanthropies, researchers and security services alike, the challenge is no longer only responding to events — it is understanding the communities those events emerge from, before decisions are made about them.</p>
+            <p>Civic Barometer is a tailor-made instrument — calibrated to a specific polygon, its history, its actors and its dynamics. There is no off-the-shelf version.</p>
+          </div>
+        </div>
+
+        <!-- surface → current → deep strata -->
+        <div class="strata" data-reveal aria-hidden="false">
+          <div class="strata__layer strata__layer--1"><span>Surface</span><em>what is said</em></div>
+          <div class="strata__layer strata__layer--2"><span>Current</span><em>civic sentiment</em></div>
+          <div class="strata__layer strata__layer--3"><span>Deep</span><em>cultural currents</em></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 4 · THE CHALLENGE                                           -->
+    <!-- ========================================================= -->
+    <section id="challenge" class="section theme-light" data-tone="challenge">
+      <div class="wrap">
+        <p class="kicker" data-reveal>§ II · The Operating Problem</p>
+        <h2 class="section__title" data-reveal>The fog of social friction.</h2>
+        <p class="section__lede" data-reveal>Decision-makers — governments, municipalities, philanthropies, researchers and security services — routinely operate in a fog about the internal depth of distinct communities. Three forces conspire to keep them blind.</p>
+
+        <div class="cols cols--3">
+          <article class="card" data-reveal>
+            <span class="card__no">01</span>
+            <p class="card__label">The Visibility Gap</p>
+            <h3>Decision-makers lack the codes.</h3>
+            <p>Insight into local slang, cultural codes and in-group references is rarely available — and almost never in real time. The signal is there. It just isn’t legible.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="card__no">02</span>
+            <p class="card__label">The Speed of Escalation</p>
+            <h3>A rumour outruns the response.</h3>
+            <p>A video, a decision, a misread post can move through a community within minutes — reshaping mood, and at the edge turning anger physical, faster than anyone can brief or even verify what is happening.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="card__no">03</span>
+            <p class="card__label">The Noise</p>
+            <h3>Generic tools drown the signal.</h3>
+            <p>Off-the-shelf social-listening platforms drown analysts in data without context. They miss the specific change in temperature that matters — because they cannot tell venting from mobilising, or grievance from genuine shift.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 5 · INTERSTITIAL QUOTE (Kahneman)                           -->
+    <!-- ========================================================= -->
+    <section id="quote" class="section section--quote theme-dark" data-tone="quote">
+      <div class="wrap wrap--narrow">
+        <p class="kicker kicker--center" data-reveal>Interstitial · From Problem to Method</p>
+        <blockquote class="pull" data-reveal>
+          <p>“We can be blind to the obvious, and we are also blind to our blindness.”</p>
+          <cite>Daniel Kahneman · <span>Thinking, Fast and Slow</span></cite>
+        </blockquote>
+
+        <!-- confidence vs knowledge gap graphic -->
+        <figure class="gap" data-reveal aria-label="A widening gap between confidence and actual knowledge — the blind spot">
+          <div class="gap__chart">
+            <div class="gap__line gap__line--conf"><span>Confidence</span></div>
+            <div class="gap__line gap__line--know"><span>Actual knowledge</span></div>
+            <div class="gap__blind"><span>The blind spot</span></div>
+          </div>
+        </figure>
+
+        <p class="quote-foot" data-reveal>Every analyst, every official, every generic tool operates inside this blind spot — most confident exactly where the picture is thinnest. The instrument exists to close the gap between how much you feel you know about a community and how much you actually do.</p>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 6 · DEPTH DIMENSIONS                                        -->
+    <!-- ========================================================= -->
+    <section id="depth" class="section theme-light" data-tone="depth">
+      <div class="wrap">
+        <p class="kicker" data-reveal>§ III · Cultural Depth</p>
+        <h2 class="section__title" data-reveal>Reading beneath the surface.</h2>
+        <p class="section__lede" data-reveal>A platform reads the words. A <strong>house of expertise</strong> reads what the words mean — through five dimensions of cultural depth.</p>
+
+        <ol class="depth-list">
+          <li class="depth-item" data-reveal style="--depth:0">
+            <span class="depth-item__no">01</span>
+            <div><h3>Linguistic</h3><p>Spoken Arabic, slang, dialects and code-switching.</p></div>
+          </li>
+          <li class="depth-item" data-reveal style="--depth:1">
+            <span class="depth-item__no">02</span>
+            <div><h3>Religious</h3><p>Schools of thought, sensitivities and the calendar.</p></div>
+          </li>
+          <li class="depth-item" data-reveal style="--depth:2">
+            <span class="depth-item__no">03</span>
+            <div><h3>Historical · Identity</h3><p>Collective memory and the references that carry weight.</p></div>
+          </li>
+          <li class="depth-item" data-reveal style="--depth:3">
+            <span class="depth-item__no">04</span>
+            <div><h3>Tribal · Clan</h3><p>Networks of affiliation, loyalty and obligation.</p></div>
+          </li>
+          <li class="depth-item" data-reveal style="--depth:4">
+            <span class="depth-item__no">05</span>
+            <div><h3>Generational &amp; Gender</h3><p>Youth sentiment vs. community elders; how voice divides.</p></div>
+          </li>
+        </ol>
+        <p class="depth-scale" aria-hidden="true"><span>Surface text</span><span>Deep context</span></p>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 7 · THE STACK                                               -->
+    <!-- ========================================================= -->
+    <section id="stack" class="section theme-light" data-tone="stack">
+      <div class="wrap">
+        <p class="kicker" data-reveal>§ IV · Product Architecture</p>
+        <h2 class="section__title" data-reveal>Three products. One spectrum.</h2>
+        <p class="section__lede" data-reveal>Each product spans the whole civic–security scale — they differ in depth and cadence, not in coverage. Enter at any layer; move between them.</p>
+
+        <div class="stack" data-reveal>
+          <div class="stack__layer" style="--band:var(--spec-1)">
+            <div class="stack__meta"><span class="stack__tier">Layer 3 · Top</span><span class="stack__cadence">Continuous</span></div>
+            <h3>The Civic Barometer</h3>
+            <p>Continuous, real-time monitoring &amp; alerting. <em>Reads the entire spectrum — over time.</em></p>
+          </div>
+          <div class="stack__layer" style="--band:var(--spec-3)">
+            <div class="stack__meta"><span class="stack__tier">Layer 2 · Middle</span><span class="stack__cadence">One-time</span></div>
+            <h3>The Deep-Dive Report</h3>
+            <p>A one-time strategic study of the polygon. <em>Reads the entire spectrum — in depth, once.</em></p>
+          </div>
+          <div class="stack__layer" style="--band:var(--spec-5)">
+            <div class="stack__meta"><span class="stack__tier">Layer 1 · Foundation</span><span class="stack__cadence">One-time setup</span></div>
+            <h3>The Polygon</h3>
+            <p>Full-spectrum mapping — the digital twin. <em>The base map everyone builds on.</em></p>
+          </div>
+        </div>
+        <div class="spectrum-bar spectrum-bar--labelled" data-reveal aria-hidden="true">
+          <div class="spectrum-bar__track"></div>
+          <p class="spectrum-bar__caption">Civic → Security · the reading axis</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 8 · LAYER 1 · THE POLYGON                                   -->
+    <!-- ========================================================= -->
+    <section id="polygon" class="section theme-light" data-tone="polygon">
+      <div class="wrap">
+        <p class="kicker" data-reveal>§ IV · Layer 1 · The Method</p>
+        <h2 class="section__title" data-reveal>Full-spectrum mapping.</h2>
+        <p class="section__lede" data-reveal>We define the Area of Responsibility — a district, a city, or a specific neighbourhood — and map the entire ecosystem of voices, places and institutions before a single reading goes live.</p>
+
+        <div class="cols cols--3 actor-rows">
+          <article class="card card--tinted" data-reveal style="--band:var(--spec-2)">
+            <h3>Digital</h3>
+            <p>Relevant local Telegram channels, WhatsApp groups, TikTok trends, Facebook community pages, and local news forums.</p>
+          </article>
+          <article class="card card--tinted" data-reveal style="--band:var(--spec-3)">
+            <h3>Human</h3>
+            <p>Clerics, educators, business and community leaders, neighbourhood elders and key voices — anyone who can move opinion within the polygon.</p>
+          </article>
+          <article class="card card--tinted" data-reveal style="--band:var(--spec-4)">
+            <h3>Institutional</h3>
+            <p>Religious, educational, charitable and civic bodies; student unions and political cells; and the informal power structures and funding networks that shape the ground.</p>
+          </article>
+        </div>
+
+        <!-- actor-network "digital twin" graphic -->
+        <figure class="twin" data-reveal aria-label="A digital twin — an actor network of voices, places and institutions">
+          <svg viewBox="0 0 600 240" role="img" aria-label="Actor-network diagram linking digital, human and institutional nodes">
+            <g class="twin__edges" stroke="var(--line)" stroke-width="1">
+              <line x1="120" y1="60"  x2="300" y2="120" /><line x1="120" y1="180" x2="300" y2="120" />
+              <line x1="480" y1="60"  x2="300" y2="120" /><line x1="480" y1="180" x2="300" y2="120" />
+              <line x1="300" y1="40"  x2="300" y2="120" /><line x1="300" y1="200" x2="300" y2="120" />
+              <line x1="120" y1="60"  x2="300" y2="40"  /><line x1="480" y1="180" x2="300" y2="200" />
+            </g>
+            <g class="twin__nodes">
+              <circle cx="300" cy="120" r="14" fill="var(--spec-3)" />
+              <circle cx="120" cy="60"  r="8" fill="var(--spec-2)" /><circle cx="120" cy="180" r="8" fill="var(--spec-2)" />
+              <circle cx="480" cy="60"  r="8" fill="var(--spec-4)" /><circle cx="480" cy="180" r="8" fill="var(--spec-4)" />
+              <circle cx="300" cy="40"  r="8" fill="var(--spec-1)" /><circle cx="300" cy="200" r="8" fill="var(--spec-5)" />
+            </g>
+          </svg>
+          <figcaption>Digital Twin — Actor Network · Voices · Places · Institutions</figcaption>
+        </figure>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 9 · LAYER 2 · THE DEEP-DIVE REPORT                          -->
+    <!-- ========================================================= -->
+    <section id="deepdive" class="section theme-light" data-tone="deepdive">
+      <div class="wrap">
+        <p class="kicker" data-reveal>§ IV · Layer 2 · Deep-Dive</p>
+        <h2 class="section__title" data-reveal>A strategic study, on the table.</h2>
+        <p class="section__lede" data-reveal>A one-time, in-depth read of how the polygon is changing — commissioned when a client needs to understand a dynamic before acting on it. Broad, civic-leaning, strategic.</p>
+
+        <p class="eyebrow eyebrow--center" data-reveal>Example study types · civic-first, spanning the spectrum</p>
+        <div class="cols cols--2 studies">
+          <article class="study" data-reveal style="--band:var(--spec-1)">
+            <span class="study__tag">Cultural · Identity</span>
+            <h3>Youth identity &amp; belonging trends.</h3>
+            <p>How a generation defines itself — and where it diverges from community elders.</p>
+          </article>
+          <article class="study" data-reveal style="--band:var(--spec-2)">
+            <span class="study__tag">Social · Civic</span>
+            <h3>Trust in public institutions.</h3>
+            <p>Where confidence in services, authority and local government is rising or eroding.</p>
+          </article>
+          <article class="study" data-reveal style="--band:var(--spec-3)">
+            <span class="study__tag">Religious · Cultural</span>
+            <h3>Dynamics around a flashpoint.</h3>
+            <p>How a specific event reverberates through religious and cultural networks.</p>
+          </article>
+          <article class="study" data-reveal style="--band:var(--spec-5)">
+            <span class="study__tag">Security · The Edge</span>
+            <h3>Drivers of radicalisation in District X.</h3>
+            <p>The same depth, applied at the far end — what pulls a few toward the extreme.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 10 · LAYER 3 · THE CIVIC BAROMETER (darkest / warmest)      -->
+    <!-- ========================================================= -->
+    <section id="barometer" class="section section--edge theme-dark" data-tone="barometer">
+      <div class="wrap">
+        <p class="kicker" data-reveal>§ IV · Layer 3 · The Barometer</p>
+        <h2 class="section__title" data-reveal>Continuous reading. Real-time alert.</h2>
+        <p class="section__lede" data-reveal>The baseline matters. We don’t tell you the polygon is angry — we tell you it is <strong>angrier than usual</strong>, where, and about what.</p>
+
+        <!-- tracked signals -->
+        <ul class="signals" data-reveal>
+          <li>Volume</li><li>Register / Toxicity</li><li>Spread</li>
+          <li>Sentiment</li><li>Cohesion</li><li>Trust</li>
+        </ul>
+        <p class="signals__sum" data-reveal aria-hidden="false">→ tracked &amp; combined into one <strong>Ground Reading</strong></p>
+
+        <!-- 30-day baseline / alert time-series graphic -->
+        <figure class="series" data-reveal aria-label="A 30-day ground reading with a baseline band and an alert threshold crossing">
+          <svg viewBox="0 0 640 220" preserveAspectRatio="none" role="img" aria-label="Time-series: a signal rising above its 30-day baseline and crossing an alert threshold">
+            <!-- baseline band -->
+            <rect x="0" y="120" width="640" height="40" fill="var(--spec-2)" opacity="0.16" />
+            <line x1="0" y1="60" x2="640" y2="60" stroke="var(--spec-5)" stroke-width="1" stroke-dasharray="4 5" opacity="0.7" />
+            <!-- the signal line -->
+            <path class="series__line" d="M0,150 C90,148 140,150 200,140 C260,130 300,135 360,120 C410,108 440,95 500,70 C540,52 580,40 640,28"
+                  fill="none" stroke="var(--spec-4)" stroke-width="2.5" />
+            <!-- alert point -->
+            <circle cx="500" cy="70" r="6" fill="var(--spec-5)" />
+          </svg>
+          <figcaption class="series__cap"><span>Ground Reading — 30-day window</span><span class="series__legend"><i class="dot dot--base"></i>Baseline <i class="dot dot--alert"></i>Alert · Threshold</span></figcaption>
+        </figure>
+
+        <p class="section__close" data-reveal>When sentiment shifts from grievance to operational intent, predictive alerting fires — with the evidence attached, calibrated to the client’s tempo. The security edge of a civic instrument.</p>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 11 · WHAT THE CLIENT RECEIVES — three altitudes            -->
+    <!-- ========================================================= -->
+    <section id="delivery" class="section theme-light" data-tone="delivery">
+      <div class="wrap">
+        <p class="kicker" data-reveal>§ V · Command Altitudes</p>
+        <h2 class="section__title" data-reveal>The same intelligence, at three altitudes.</h2>
+        <p class="section__lede" data-reveal>A different axis from the products. The layers are <em>what</em> a client buys; altitude is <em>who</em> receives it — from the duty commander to the strategist.</p>
+
+        <div class="altitudes">
+          <article class="altitude" data-reveal>
+            <span class="altitude__level">03 / Strategic</span>
+            <h3>Deep-dive intelligence.</h3>
+            <p class="altitude__for">For the strategist &amp; policy lead.</p>
+            <p>Entity profiling and network analysis — links between civic institutions, student groups and informal power structures — plus thematic reports on a phenomenon, with auditable sourcing.</p>
+            <p class="altitude__note">Enough to actually intervene.</p>
+          </article>
+          <article class="altitude" data-reveal>
+            <span class="altitude__level">02 / Operational</span>
+            <h3>Listening reports.</h3>
+            <p class="altitude__for">For command &amp; the planning desk.</p>
+            <p>Weekly &amp; monthly trends, sentiment direction and emerging grievances likely to flare.</p>
+            <p class="altitude__note">A defensible picture, not a feed of posts.</p>
+          </article>
+          <article class="altitude" data-reveal>
+            <span class="altitude__level">01 / Tactical</span>
+            <h3>Real-time heat alerts.</h3>
+            <p class="altitude__for">For the ground-force commander.</p>
+            <p>Immediate notification on rapid escalation, catalytic viral content with reach and decay, and flags when known actors begin moving on a frame.</p>
+            <p class="altitude__note">Deploy before the first stone is thrown.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 12 · NOT A PLATFORM — platform vs house of expertise        -->
+    <!-- ========================================================= -->
+    <section id="platform" class="section theme-light" data-tone="platform">
+      <div class="wrap">
+        <p class="kicker" data-reveal>§ VII · Platform vs. Expertise</p>
+        <h2 class="section__title" data-reveal>Not a platform. A <span class="accent">house of expertise</span>.</h2>
+        <p class="section__lede" data-reveal>Every competitor in this space is a tool you operate. We are a house of expertise that delivers judgment. The difference is in kind, not degree.</p>
+
+        <!-- "this morning" same-input contrast -->
+        <div class="morning" data-reveal>
+          <p class="morning__label">This morning</p>
+          <div class="morning__pair">
+            <blockquote class="morning__shallow">“There are 500 posts about the police this morning.”</blockquote>
+            <blockquote class="morning__deep">“A single false frame is accelerating among under-25s, traceable to one decision — venting, not yet mobilising.”</blockquote>
+          </div>
+        </div>
+
+        <div class="compare" data-reveal>
+          <div class="compare__head">
+            <span class="compare__col compare__col--cold">An OSINT Platform — what it gives you</span>
+            <span class="compare__col compare__col--warm">Multispect — a cultural-regional house of expertise</span>
+          </div>
+          <dl class="compare__rows">
+            <div class="compare__row"><dt>What it is</dt><dd class="cold">A SaaS tool you operate</dd><dd class="warm">A house of expertise that delivers an assessment</dd></div>
+            <div class="compare__row"><dt>What it reads</dt><dd class="cold">Words, keywords, volume, geotags</dd><dd class="warm">Meaning — register, religious allusion, in-group idiom</dd></div>
+            <div class="compare__row"><dt>The cultural layer</dt><dd class="cold">Machine translation across many languages</dd><dd class="warm">Native regional analysts reading one place in depth</dd></div>
+            <div class="compare__row"><dt>What it tells you</dt><dd class="cold">That something is being discussed</dd><dd class="warm">What it means, who is moving it, whether anyone will act</dd></div>
+            <div class="compare__row"><dt>Signal vs. noise</dt><dd class="cold">Surfaces volume; cannot tell venting from mobilising</dd><dd class="warm">Distinguishes venting from mobilising, grievance from genuine shift</dd></div>
+            <div class="compare__row"><dt>Output</dt><dd class="cold">A dashboard and a data feed</dd><dd class="warm">A human-authored assessment with auditable sourcing</dd></div>
+            <div class="compare__row"><dt>Coverage shape</dt><dd class="cold">Broad, shallow, global</dd><dd class="warm">Deep, narrow, region-native</dd></div>
+          </dl>
+        </div>
+
+        <!-- CLOSING LINE — TBD: leave as an empty styled placeholder; do not invent copy -->
+        <p class="closing-tbd" data-reveal data-placeholder="CLOSING LINE — TBD"></p>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 13 · WHY MULTISPECT — breadth vs depth                      -->
+    <!-- ========================================================= -->
+    <section id="why" class="section theme-light" data-tone="why">
+      <div class="wrap">
+        <p class="kicker" data-reveal>§ VII · Differentiation</p>
+        <h2 class="section__title" data-reveal>Standard tools offer breadth. We offer depth.</h2>
+
+        <!-- worked examples: civic + security -->
+        <div class="cols cols--2 worked" data-reveal>
+          <div class="worked__item">
+            <span class="worked__tag">Shallow · Wide — elsewhere</span>
+            <p class="worked__shallow">“There are 500 posts about the police this morning.”</p>
+          </div>
+          <div class="worked__item worked__item--civic">
+            <span class="worked__tag">Civic example · what depth sees</span>
+            <p>“Trust in the new school reform is fracturing along generational lines — traceable to a single policy detail, not the reform as a whole.”</p>
+          </div>
+        </div>
+        <div class="worked worked--single" data-reveal>
+          <div class="worked__item worked__item--security">
+            <span class="worked__tag">Security example · the same depth</span>
+            <p>“Ground temperature has risen <strong>28% above its 30-day baseline</strong> over 72 hours — concentrated among under-25s, traceable to one municipal decision. Not yet mobilising.”</p>
+          </div>
+        </div>
+
+        <div class="cols cols--4 diffs">
+          <article class="card" data-reveal><span class="card__no">01</span><h3>Cultural &amp; contextual intelligence.</h3><p>Meaning, not words — slang, religious codes, cultural dog-whistles. We distinguish venting from mobilising.</p></article>
+          <article class="card" data-reveal><span class="card__no">02</span><h3>Full-spectrum coverage.</h3><p>No blind spots. Civic institutions, religious bodies and student groups — mapped at their intersection.</p></article>
+          <article class="card" data-reveal><span class="card__no">03</span><h3>Granular segmentation.</h3><p>We read the community by segment — demographics, ideology, affiliation — not as a single voice.</p></article>
+          <article class="card" data-reveal><span class="card__no">04</span><h3>From insight to decision.</h3><p>Usable judgment a decision-maker can act on, with the citation trail intact for review.</p></article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 14 · IN PRACTICE · CASE STUDIES (dark / warm)              -->
+    <!-- ========================================================= -->
+    <section id="cases" class="section section--cases theme-dark" data-tone="cases">
+      <div class="wrap">
+        <p class="kicker" data-reveal>§ VIII · In Practice</p>
+        <h2 class="section__title" data-reveal>Case studies.</h2>
+        <p class="section__lede" data-reveal>Three real events, read across the spectrum. In each, the conditional voice holds — the instrument would have <em>surfaced</em> and given <em>early warning</em>, never &ldquo;prevented&rdquo;.</p>
+
+        <!-- Case 01 · Sweden -->
+        <article class="case" data-reveal>
+          <header class="case__head">
+            <div class="case__id"><span class="case__country">Sweden</span><span class="case__meta">Case 01 · 2021–2023</span></div>
+            <div class="case__pos" aria-label="Spectrum position: civic">
+              <div class="spectrum-bar spectrum-bar--mini"><div class="spectrum-bar__track"></div><span class="spectrum-bar__marker" style="--pos:0.30"></span></div>
+            </div>
+          </header>
+          <h3 class="case__title">The trust that broke quietly.</h3>
+          <p class="case__sub">A purely civic rupture — no riot, a collapse of trust between a community and the state.</p>
+          <figure class="press" aria-label="Press photo placeholder">
+            <div class="press__ph" role="img" aria-label="News photo placeholder — horizontal format"></div>
+            <figcaption>SOURCE: AFP / France 24 — drop a horizontal news photo at assets/img/case-sweden.jpg</figcaption>
+          </figure>
+          <div class="case__cols">
+            <div><h4>What happened</h4><p>A claim that Swedish social services were “kidnapping” Muslim children spread from a handful of parents into the largest influence campaign the country has ever faced. The narrative hardened — forced conversion, targeting of Muslim families — amplified by Arabic-language influencers with millions of followers, and eventually fed into foreign information operations. No mass violence: instead, eroded trust, threats against social workers, and many quitting the profession.</p></div>
+            <div><h4>Where the instrument would have helped</h4><p>The grievance began with a real internal signal months before foreign actors added a religious filter. A barometer reading institutional trust — not just unrest — surfaces that erosion early, while it is still local. It identifies the community voices with standing to push back (the Muslim civil-society groups who tried, and were drowned out), giving decision-makers raw material for a counter-narrative — from public sources only, at group level.</p></div>
+          </div>
+        </article>
+
+        <!-- Case 02 · United Kingdom -->
+        <article class="case" data-reveal>
+          <header class="case__head">
+            <div class="case__id"><span class="case__country">United Kingdom</span><span class="case__meta">Case 02 · August 2024</span></div>
+            <div class="case__pos" aria-label="Spectrum position: civic to security">
+              <div class="spectrum-bar spectrum-bar--mini"><div class="spectrum-bar__track"></div><span class="spectrum-bar__marker" style="--pos:0.72"></span></div>
+            </div>
+          </header>
+          <h3 class="case__title">Hours from rumour to riot.</h3>
+          <p class="case__sub">A case that crosses the whole scale — civic grief, hijacked into a mobilising frame, ending at the security edge.</p>
+          <figure class="press" aria-label="Press photo placeholder">
+            <div class="press__ph" role="img" aria-label="News photo placeholder — horizontal format"></div>
+            <figcaption>SOURCE: CNN / Reuters — drop a horizontal news photo at assets/img/case-uk.jpg</figcaption>
+          </figure>
+          <div class="case__cols">
+            <div><h4>What happened</h4><p>After a stabbing in Southport, a false name for the attacker reached over 30,000 mentions from 18,000 accounts within a day — before any official identity was released. A 14,000-member Telegram group became the organising hub. Within days, anti-migrant riots targeted mosques and hotels housing asylum seekers across England.</p></div>
+            <div><h4>Where the instrument would have helped</h4><p>This is the barometer’s core case. A single false frame accelerating far above baseline within hours is exactly the curve it tracks — and cultural depth is what distinguishes legitimate grief over murdered children from the mobilising narrative riding on top of it. It flags the shift from grievance to operational intent as coordination begins — early warning in the gap between the viral post and the first stone.</p></div>
+          </div>
+        </article>
+
+        <!-- Case 03 · France -->
+        <article class="case" data-reveal>
+          <header class="case__head">
+            <div class="case__id"><span class="case__country">France</span><span class="case__meta">Case 03 · June–July 2023</span></div>
+            <div class="case__pos" aria-label="Spectrum position: security edge">
+              <div class="spectrum-bar spectrum-bar--mini"><div class="spectrum-bar__track"></div><span class="spectrum-bar__marker" style="--pos:0.92"></span></div>
+            </div>
+          </header>
+          <h3 class="case__title">Saturated ground, single spark.</h3>
+          <p class="case__sub">The security edge — fast, violent, aimed at the state. But the ground was saturated long before the spark.</p>
+          <figure class="press" aria-label="Press photo placeholder">
+            <div class="press__ph" role="img" aria-label="News photo placeholder — horizontal format"></div>
+            <figcaption>SOURCE: AFP / ABC News — drop a horizontal news photo at assets/img/case-france.jpg</figcaption>
+          </figure>
+          <div class="case__cols">
+            <div><h4>What happened</h4><p>A police shooting of a 17-year-old, contradicted by a viral video, ignited nationwide riots — over 5,000 vehicles burned, 250 police stations attacked, town halls and schools targeted across France. The conditions had built for years: accumulated grievance over policing, and a 260,000-signature petition months earlier.</p></div>
+            <div><h4>Where the instrument would have helped</h4><p>The spark is unpredictable; the saturation is not. A one-time deep-dive maps where trust in police has already collapsed and which past events still carry weight in collective memory — district by district. The barometer then reads how fast a frame is spreading and the moment mourning turns to mobilisation, telling you which areas are angrier than usual, and why — not that “the suburb is angry.”</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 15 · ABOUT MULTISPECT                                       -->
+    <!-- ========================================================= -->
+    <section id="about" class="section theme-light" data-tone="about">
+      <div class="wrap">
+        <p class="kicker" data-reveal>§ VI · About Multispect</p>
+        <h2 class="section__title" data-reveal>A house of expertise — cultural, regional, human.</h2>
+        <p class="section__lede" data-reveal>We pair experienced analysts with modern AI, applying each to what it does best — without substituting one for the other.</p>
+
+        <div class="cols cols--2 pillars">
+          <article class="pillar" data-reveal><span class="pillar__no">01</span><h3>Cultural fluency</h3><p>Our analysts work natively across Arabic and other Middle Eastern, Slavic and European languages, interpreting the cultural register rather than the literal text — the religious allusion, the in-group idiom, the historical reference automated translation cannot capture.</p></article>
+          <article class="pillar" data-reveal><span class="pillar__no">02</span><h3>Domain depth</h3><p>We serve diplomatic missions, municipal authorities and security-adjacent clients across some of the most sensitive theatres in the world — Israel, the wider Middle East, and Western Europe. Each engagement is tailor-made for the client and the context.</p></article>
+          <article class="pillar" data-reveal><span class="pillar__no">03</span><h3>AI as instrument, not product</h3><p>Modern AI supports every stage — narrative detection, sentiment modelling, source mapping, translation triage. The intelligence is delivered as a human-authored assessment with fully auditable sourcing. The client receives analytical judgment, not access to a generic tool.</p></article>
+          <article class="pillar" data-reveal><span class="pillar__no">04</span><h3>Boutique by design</h3><p>Our services are led by senior, seasoned analysts with direct responsibility for delivery, combining a bespoke approach with deep, first-hand expertise. The client works with the people who produce the intelligence.</p></article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 16 · OPERATING PRINCIPLES                                   -->
+    <!-- ========================================================= -->
+    <section id="principles" class="section theme-light" data-tone="principles">
+      <div class="wrap">
+        <p class="kicker" data-reveal>§ IX · Ethics &amp; Governance</p>
+        <h2 class="section__title" data-reveal>Understanding, not surveillance.</h2>
+        <p class="section__lede" data-reveal>Lawful scope, group-level reading and human authorship — designed in, not retrofitted. Both an ethical commitment and a clean break from the opaque security-vendor market.</p>
+
+        <div class="cols cols--4 principles">
+          <article class="principle" data-reveal><span class="principle__no">01</span><h3>Open-source only.</h3><p>We work from public and open material. No intrusion, no covert collection — a basis that survives scrutiny.</p></article>
+          <article class="principle" data-reveal><span class="principle__no">02</span><h3>Auditable sourcing.</h3><p>Every assessment carries its chain of evidence — sourcing that holds up in court, in committee, or in the press.</p></article>
+          <article class="principle" data-reveal><span class="principle__no">03</span><h3>Groups, never individuals.</h3><p>We assess the temperature of places and publics — not the propensity of named persons. Aligned with the EU AI Act’s red lines (Art. 5).</p></article>
+          <article class="principle" data-reveal><span class="principle__no">04</span><h3>Human-authored judgment.</h3><p>AI collects and triages; every conclusion is written by a named analyst who stands behind it. Understanding, not automation.</p></article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 17 · CLOSE / CONTACT                                        -->
+    <!-- ========================================================= -->
+    <section id="contact" class="section section--close theme-light" data-tone="contact">
+      <div class="wrap">
+        <p class="kicker" data-reveal>§ X · Close</p>
+        <h2 class="section__title" data-reveal>From reaction to understanding — and, where needed, prevention.</h2>
+
+        <div class="cols cols--3 benefits">
+          <article class="benefit" data-reveal><span class="benefit__no">01</span><h3>Understanding for better decisions</h3><p>A clear read of community depth before a decision is made — so policy, programmes and deployments meet the ground as it actually is.</p></article>
+          <article class="benefit" data-reveal><span class="benefit__no">02</span><h3>A defensible, evidence-based picture</h3><p>Which frame is spreading, who is carrying it, and which voices have the standing to push back — with the sourcing to brief command or committee.</p></article>
+          <article class="benefit" data-reveal><span class="benefit__no">03</span><h3>Total situational awareness</h3><p>Enter any friction event knowing who is driving it, why, and — critically — who inside the community has the standing to shift the dynamic.</p></article>
+        </div>
+
+        <div class="contact" data-reveal>
+          <div class="contact__copy">
+            <p class="contact__lede">Ready to define your first polygon? We can scope an Area of Responsibility, a coverage period, and a delivery cadence in a single working session.</p>
+            <a class="btn" href="mailto:info@multispect.io?subject=Scoping%20a%20first%20polygon">Start a conversation</a>
+          </div>
+          <address class="contact__details">
+            <p class="contact__label">Direct line</p>
+            <p><a href="mailto:info@multispect.io">info@multispect.io</a></p>
+            <p><a href="tel:+972545775505">+972-54-577-5505</a></p>
+          </address>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="wrap footer__inner">
+          <span class="footer__brand">Multi<span class="nav__mark-dot">·</span>Spect Solutions</span>
+          <span class="footer__note">Civic Barometer™ · A cultural-regional house of expertise</span>
+        </div>
+      </footer>
+    </section>
+
+  </main>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
