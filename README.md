@@ -1,122 +1,127 @@
-# Multispect · Civic Barometer — marketing homepage
+# Multispect · Civic Barometer — marketing site
 
-A single, long-scroll, static credibility/positioning page for **Multispect Solutions**, built from the 18-slide *Civic Barometer* deck. No build step, no framework, no runtime dependencies — plain HTML, CSS and a little vanilla JS.
+A static, multi-page credibility/positioning site for **Multispect Solutions**, built from the 18-slide *Civic Barometer* deck. No build step, no framework, no runtime dependencies — plain HTML, CSS and a little vanilla JS. Deployable by dropping the folder on any static host.
 
 ```
 multispect-site/
-├── index.html      ← all content, one page, 17 sections
+├── index.html      ← landing "spine": hero · spectrum · condensed challenge ·
+│                      stack at-a-glance · condensed why · close + contact
+├── method.html     ← Method: challenge · executive summary · blind-spot · cultural depth
+├── products.html   ← Products: Polygon · Deep-Dive · Barometer · Command Altitudes
+├── cases.html      ← Case Studies: Sweden / UK / France (collapsed by default)
+├── why.html        ← Why Us: differentiators · platform-vs-expertise comparison
+├── about.html      ← About: house of expertise · ethics & governance
 ├── styles.css      ← design tokens + all styling (palette lives at :root)
-├── main.js         ← scroll reveal · sticky nav/scroll-spy · dynamic background
-├── README.md       ← this file
-└── assets/
-    ├── fonts/      ← (optional) drop self-hosted woff2 here
-    └── img/        ← drop press photos + OG share image here
+├── main.js         ← scroll reveal · sticky nav · dynamic background · accordions · legacy redirects
+└── assets/         ← drop press photos + OG share image here
 ```
 
----
+## Information architecture
+
+The landing page (`index.html`) is the lean narrative spine — roughly a third of the
+content. The detail lives on five menu-reachable destination pages, with deeper
+material behind expand/collapse (`<details>` accordions). The nav is identical on
+every page; the current page is highlighted (`data-page` on `<body>` → `data-nav`
+link). Case studies are **collapsed by default** and expand to the full read.
+
+**Legacy links:** the site was originally a single page. `main.js` maps old in-page
+anchors (e.g. `/#barometer`, `/#cases`) to their new pages, so existing deep links
+still resolve. Deep links to a specific accordion (e.g. `cases.html#case-uk`) open
+that panel automatically.
 
 ## Preview locally
 
-It's a static site, so any static server works. From inside `multispect-site/`:
-
 ```bash
-# Python (built in on macOS)
-python3 -m http.server 8000
-# then open http://localhost:8000
-
-# …or Node, if you prefer
-npx serve .
+# from inside multispect-site/
+python3 -m http.server 8000      # → http://localhost:8000
+# or:  npx serve .
 ```
 
-Opening `index.html` directly via `file://` also works, but a local server is recommended so relative asset paths behave exactly as they will in production.
-
----
+`npx serve` strips `.html` from URLs locally (cosmetic); GitHub Pages serves the
+`.html` files directly, which is what every internal link uses.
 
 ## Deploy to a static host
 
-Drop the **entire `multispect-site/` folder** on any static host — nothing to build.
+Drop the whole `multispect-site/` folder on any static host — no build command.
+GitHub Pages / Netlify / Vercel / Cloudflare Pages / S3 all work; make `index.html`
+the index document.
 
-- **Netlify / Vercel / Cloudflare Pages:** drag the folder into the dashboard, or point the project at this directory with **no build command** and the folder as the publish/output directory.
-- **GitHub Pages:** commit the files and enable Pages on the branch/folder.
-- **S3 / any web server:** upload the files; make `index.html` the index document.
+## Retune the palette (one place)
 
----
-
-## Retune the palette (do this in one place)
-
-All colours are CSS custom properties at the top of `styles.css`, under **`:root`** (section *1 · DESIGN TOKENS*). The five spectrum hues — the only "brand" colours — are:
+All colours are CSS custom properties at the top of `styles.css` (`:root`). The five
+spectrum hues are the only "brand" colours:
 
 ```css
---spec-1: #1f7480;  /* Cultural · Religious — deep teal (coolest) */
---spec-2: #4f93a0;  /* Social · Civic       — aqua             */
---spec-3: #c2a24e;  /* Economic             — muted gold (pivot)*/
---spec-4: #c4742f;  /* Political            — amber            */
---spec-5: #a8392b;  /* Security             — ember (warm edge)*/
+--spec-1:#1f7480; /* Cultural · Religious — deep teal (coolest) */
+--spec-2:#4f93a0; /* Social · Civic       — aqua             */
+--spec-3:#c2a24e; /* Economic             — muted gold (pivot)*/
+--spec-4:#c4742f; /* Political            — amber            */
+--spec-5:#a8392b; /* Security             — ember (warm edge)*/
 ```
 
-Change those and the whole site — spectrum bar, motifs, accents, band borders — retunes automatically. Neutral ink/paper tones and the light/dark semantic colours are defined just below.
+Change those and the whole site retunes — spectrum bars, the graphics, accents, band
+borders. Neutral ink/paper tones sit just below.
 
 ### Section background colours (the "travelling spectrum")
 
-The background colour shifts as you scroll — cool/light at the top, deepening to a dark warm "security edge" around the Barometer and Case Studies, then resolving back to a calm civic tone at the close. These per-section colours live in **`main.js`**, in the `TONES` object (keys match each `<section id="…">`). Edit a hex there to retune a section's backdrop. Sections that should render light text are marked `class="theme-dark"` in `index.html`; light sections use `class="theme-light"`.
+The background shifts as you scroll — cool/light at the top of a page, deepening to a
+dark warm "security edge" around the Barometer / Case Studies, then resolving back to
+a calm civic tone. Per-section colours live in `main.js` → the `TONES` object (keys
+match each `<section id="…">`). Sections that render light text carry
+`class="theme-dark"` and paint their own dark background (so their text is always
+readable); light sections are transparent and show the travelling layer.
 
----
+## Graphics
 
-## Where to drop press images
+All visuals are inline SVG in the brand palette (no libraries; responsive; each has a
+`<title>`/aria label; all animation respects `prefers-reduced-motion`):
 
-The three case studies (Sweden / UK / France) use **empty, captioned, correctly-proportioned (16:9) placeholders** — no imagery is generated. To add a real news photo, drop a file in `assets/img/` and replace the placeholder `<div class="press__ph">` with an `<img>`:
+- **Spectrum scale** (landing) — civic→security gradient with a "where tension is moving" marker
+- **Stack diagram** (landing) — three layers crossing the civic→security axis
+- **Blind-spot chart** (method) — confidence vs. actual knowledge, with the gap shaded
+- **Cultural-depth strata** (method) — surface text → deep context, five layers
+- **Actor-network** (products · Polygon) — digital / human / institutional nodes
+- **Barometer** (products) — 30-day baseline → threshold → alert, plus six metric sparklines
+- **Command Altitudes** (products) — vertical tactical → operational → strategic axis
+- **Case escalation curves** (cases) — slow erosion / hours-to-spike / years-then-spark
 
-```html
-<!-- before -->
-<div class="press__ph" role="img" aria-label="News photo placeholder — horizontal format"></div>
+## Press images (case studies)
 
-<!-- after -->
-<img src="assets/img/case-sweden.jpg" alt="…describe the photo…" loading="lazy" width="1600" height="900" />
-```
+Each case has an empty, captioned 16:9 slot — no imagery is generated. To add a real
+photo, drop a file in `assets/img/` and replace the placeholder `<div class="press__ph">`
+with an `<img loading="lazy" …>`. Suggested names: `case-sweden.jpg`, `case-uk.jpg`,
+`case-france.jpg`. Keep the `<figcaption>` source credit accurate to whatever you license.
 
-Suggested filenames (referenced in the captions): `case-sweden.jpg`, `case-uk.jpg`, `case-france.jpg`. Keep the `<figcaption>` `SOURCE: …` credit accurate to whatever image you actually license.
-
-**Open Graph share image:** drop a 1200×630 image at `assets/img/og-cover.jpg` — the `<meta property="og:image">` tag in `index.html` already points at it.
-
----
+**OG share image:** drop a 1200×630 image at `assets/img/og-cover.jpg` (already
+referenced by the `og:image` meta tag on every page).
 
 ## The "CLOSING LINE — TBD"
 
-The *Not a platform / house of expertise* section (`#platform`) ends with an intentionally **empty, styled placeholder** — no closing line was invented. Find it in `index.html`:
+The platform-vs-expertise section on `why.html` ends with an intentionally **empty,
+styled placeholder** — no closing line was invented:
 
 ```html
 <p class="closing-tbd" data-reveal data-placeholder="CLOSING LINE — TBD"></p>
 ```
 
-When you have the line, put the copy inside the `<p>` and delete the `data-placeholder` attribute (the dashed placeholder styling keys off it).
-
----
+Put the copy inside the `<p>` and delete `data-placeholder` when ready.
 
 ## Contact details
 
-Live in the **`#contact`** section near the end of `index.html`:
+In the `#contact` section of `index.html` (and linked from every page's CTA):
 
-- Email: `info@multispect.io` (also the `Start a conversation` mailto button)
+- Email: `info@multispect.io` (also the `Start a conversation` mailto)
 - Phone: `+972-54-577-5505`
-
-Update them in that one section (the `mailto:`/`tel:` links and the visible text).
-
----
-
-## Fonts
-
-By default the site uses a refined **system font stack** — a serif for display (Spectral → Iowan/Palatino/Georgia fallback) and a clean sans for body (Inter → system-ui). This renders everywhere with **zero network requests**.
-
-To self-host fonts (recommended for production polish):
-
-1. Put woff2 files in `assets/fonts/` (e.g. `spectral-600.woff2`, `spectral-400.woff2`, `inter-variable.woff2`).
-2. Uncomment the `@font-face` block at the top of `styles.css` (section *0*).
-3. The `--font-display` / `--font-body` tokens already list `"Display"` / `"Body"` first, so they'll be used automatically once loaded.
-
----
 
 ## Accessibility & motion
 
-- Semantic landmarks, ordered headings, visible focus states, AA-minded contrast, alt text on the meaningful SVG/figures.
-- **`prefers-reduced-motion`** is fully respected: scroll reveals, the living gradient and the background colour transitions are all disabled, leaving a clean static page.
-- The sticky nav collapses to an accessible toggle menu on small screens.
+Semantic landmarks, ordered headings, visible focus states, AA-minded contrast, alt
+text. `prefers-reduced-motion` disables scroll reveals, the living gradient and the
+background transitions, leaving a clean static page. The sticky nav collapses to an
+accessible toggle menu on small screens.
+
+## Fonts
+
+Default is a refined system stack (serif display + clean sans) — zero network
+requests. To self-host, add woff2 files to `assets/fonts/` and uncomment the
+`@font-face` block at the top of `styles.css`.
