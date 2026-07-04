@@ -518,6 +518,92 @@ strong{font-weight:600;color:var(--text);}
 .footer__note{font-size:.78rem;letter-spacing:.06em;color:var(--text-faint);}
 
 /* -----------------------------------------------------------------
+   9b · LIVING GRAPHICS — hover states & ambient motion.
+   Every movement restates the idea of its section: strata expand at
+   the depth you read, the blind spot widens, the stack layer slides
+   out, the polygon breathes, the alert pulses. All of it is pure
+   CSS, so section 13 (prefers-reduced-motion) silences everything.
+----------------------------------------------------------------- */
+
+/* — cards lift; their glyph wakes up — */
+.card,.pillar,.principle,.benefit,.altitude,.study,.worked__item{
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);}
+.card:hover,.pillar:hover,.principle:hover,.benefit:hover,.altitude:hover,.study:hover,.worked__item:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 30px -16px color-mix(in srgb,var(--band,var(--ink-700)) 50%,transparent);}
+.glyph{transition:transform .35s var(--ease),opacity .35s;}
+.card:hover .glyph,.pillar:hover .glyph,.principle:hover .glyph,
+.benefit:hover .glyph,.altitude:hover .glyph{transform:scale(1.18) rotate(-4deg);opacity:1;}
+.spectrum-bar__marker{transition:transform .35s var(--ease);}
+.study:hover .spectrum-bar__marker{transform:translate(-50%,-50%) scale(1.3);}
+
+/* — strata: hover a layer to read at that depth; it spans the full
+     width while the other depths recede — */
+.strata__layer{transition:margin .5s var(--ease),box-shadow .4s var(--ease),opacity .4s;}
+.strata:hover .strata__layer{opacity:.68;}
+.strata .strata__layer:hover{opacity:1;margin-inline:0;
+  box-shadow:0 14px 30px -14px rgba(0,0,0,.4);}
+
+/* — the blind spot widens while you look at it — */
+.gap__line,.gap__blind{transition:top .6s var(--ease),bottom .6s var(--ease);}
+.gap__blind span{transition:letter-spacing .6s var(--ease);}
+.gap:hover .gap__line--conf{top:8%;}
+.gap:hover .gap__line--know{bottom:5%;}
+.gap:hover .gap__blind{top:8%;bottom:5%;}
+.gap:hover .gap__blind span{letter-spacing:.26em;}
+
+/* — depth dimensions: hovering pulls the item one layer deeper — */
+.depth-item{transition:transform .35s var(--ease),background-color .45s var(--ease),box-shadow .35s var(--ease);}
+.depth-item:hover{transform:translateX(10px);
+  background:color-mix(in srgb, var(--spec-2) calc(15% + var(--depth)*14%), var(--bg));
+  box-shadow:0 10px 24px -14px color-mix(in srgb,var(--spec-2) 50%,transparent);}
+
+/* — product stack: the hovered layer slides out of the pile — */
+.stack__layer{transition:transform .35s var(--ease),box-shadow .35s var(--ease);}
+.stack__layer::after{transition:opacity .35s;}
+.stack__layer:hover{transform:translateX(10px);
+  box-shadow:0 12px 26px -14px color-mix(in srgb,var(--band) 45%,transparent);}
+.stack__layer:hover::after{opacity:.12;}
+
+/* — hero polygon: breathes on its own; hover lights the inner web — */
+.motif-poly{animation:dash-march 16s linear infinite;}
+@keyframes dash-march{to{stroke-dashoffset:-110;}}
+.motif-core-ring{transform-box:fill-box;transform-origin:center;
+  animation:core-pulse 3.2s var(--ease) infinite;}
+@keyframes core-pulse{0%,100%{transform:scale(1);opacity:.45;}50%{transform:scale(1.3);opacity:.18;}}
+.motif-spokes{transition:opacity .5s;}
+.hero__motif:hover .motif-spokes{opacity:.62;}
+
+/* — digital twin: hover activates the network, core first — */
+.twin__edges line{transition:stroke .45s;}
+.twin:hover .twin__edges line{stroke:color-mix(in srgb,var(--spec-3) 50%,var(--line));}
+.twin__nodes circle{transform-box:fill-box;transform-origin:center;transition:transform .4s var(--ease);}
+.twin:hover .twin__nodes circle{transform:scale(1.3);}
+.twin__nodes circle:nth-child(2),.twin__nodes circle:nth-child(3){transition-delay:60ms;}
+.twin__nodes circle:nth-child(4),.twin__nodes circle:nth-child(5){transition-delay:120ms;}
+.twin__nodes circle:nth-child(6),.twin__nodes circle:nth-child(7){transition-delay:180ms;}
+
+/* — barometer: the alert never sleeps; hover replays the curve — */
+.series__alert{transform-box:fill-box;transform-origin:center;
+  animation:alert-pulse 2.4s ease-out infinite;}
+@keyframes alert-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(1.4);}}
+.series__line{stroke-dasharray:900;stroke-dashoffset:0;}
+.series:hover .series__line{animation:series-draw 1.5s var(--ease);}
+@keyframes series-draw{from{stroke-dashoffset:900;}}
+.signals li{transition:border-color .3s,color .3s,transform .3s var(--ease);}
+.signals li:hover{border-color:var(--spec-4);color:var(--text);transform:translateY(-2px);}
+
+/* — platform table: the row you weigh warms toward expertise — */
+.compare__row{transition:background-color .3s;}
+.compare__row:hover{background:color-mix(in srgb,var(--civic) 6%,transparent);}
+
+/* — press figure: the photo leans in — */
+.press__img{transition:opacity .4s var(--ease),transform .6s var(--ease);}
+.press__frame:hover .press__img{transform:scale(1.03);}
+.press__ph svg{transition:transform .4s var(--ease);}
+.press__frame:hover .press__ph svg{transform:translateY(-3px);}
+
+/* -----------------------------------------------------------------
    10 · THEME (dark sections)
 ----------------------------------------------------------------- */
 .theme-dark{color:var(--text);}
@@ -536,6 +622,12 @@ strong{font-weight:600;color:var(--text);}
 .js [data-reveal].is-in{opacity:1;transform:none;}
 /* gentle stagger for grouped children */
 .js .cols [data-reveal].is-in,.js .bands .band.is-in{transition-delay:calc(var(--stagger,0)*70ms);}
+/* after the entrance settles, transitions go back to serving hover states */
+.js [data-reveal].is-settled,
+.js .cols [data-reveal].is-settled,
+.js .bands .band.is-settled{transition-delay:0s;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),
+             background-color .35s var(--ease),opacity .35s var(--ease);}
 
 /* -----------------------------------------------------------------
    12 · RESPONSIVE

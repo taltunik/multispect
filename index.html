@@ -117,7 +117,7 @@
               <circle cx="220" cy="250" r="4" /><circle cx="100" cy="190" r="4" />
             </g>
             <!-- the core node -->
-            <circle cx="232" cy="145" r="9.5" fill="none" stroke="var(--spec-2)" opacity="0.45" />
+            <circle class="motif-core-ring" cx="232" cy="145" r="9.5" fill="none" stroke="var(--spec-2)" opacity="0.45" />
             <circle cx="232" cy="145" r="5" fill="var(--spec-2)" />
             <!-- the "current" — read from the core, dropping onto the spectrum -->
             <line x1="232" y1="157" x2="232" y2="300" stroke="var(--spec-4)" stroke-width="2" stroke-dasharray="3 4" />
@@ -464,7 +464,7 @@
             <path class="series__line" d="M0,150 C90,148 140,150 200,140 C260,130 300,135 360,120 C410,108 440,95 500,70 C540,52 580,40 640,28"
                   fill="none" stroke="var(--spec-4)" stroke-width="2.5" />
             <!-- alert point -->
-            <circle cx="500" cy="70" r="6" fill="var(--spec-5)" />
+            <circle class="series__alert" cx="500" cy="70" r="6" fill="var(--spec-5)" />
           </svg>
           <figcaption class="series__cap"><span>Ground Reading — 30-day window</span><span class="series__legend"><i class="dot dot--base"></i>Baseline <i class="dot dot--alert"></i>Alert · Threshold</span></figcaption>
         </figure>
