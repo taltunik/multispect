@@ -265,8 +265,13 @@ strong{font-weight:600;color:var(--text);}
 .hero__motif figcaption{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);
   text-align:center;margin-top:1rem;}
 
+.hero__story{max-width:64ch;margin:clamp(2.8rem,7vh,5rem) 0 0;padding-left:1.5rem;
+  border-left:3px solid;border-image:linear-gradient(180deg,var(--spec-2),var(--spec-4)) 1;
+  font-size:calc(var(--fs-body)*1.06);line-height:1.75;color:var(--text-soft);}
+
 .hero__premise{font-family:var(--font-display);font-size:clamp(1.15rem,.95rem+1vw,1.7rem);font-style:italic;
   max-width:48ch;margin:clamp(2.5rem,6vh,5rem) 0 0;color:var(--text);line-height:1.4;position:relative;}
+.hero__story + .hero__premise{margin-top:clamp(1.8rem,4vh,3rem);}
 .quote-glyph{color:var(--spec-3);font-size:1.4em;line-height:0;}
 .quote-attr{display:block;font-style:normal;font-family:var(--font-body);font-size:.8rem;letter-spacing:.16em;
   text-transform:uppercase;color:var(--text-faint);margin-top:1rem;}
