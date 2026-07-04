@@ -125,6 +125,36 @@
   });
 
   /* ===============================================================
+     1b · SPECTRUM HOVER — hovering a band lifts its card (CSS) and
+     sends a runner gliding along the axis to that band's node, so
+     the bands read as positions on one scale.
+  =============================================================== */
+  var spectrumSec = document.getElementById("spectrum");
+  if (spectrumSec) {
+    var specBar = spectrumSec.querySelector(".spectrum-bar");
+    var specBands = spectrumSec.querySelectorAll(".band");
+    if (specBar && specBands.length > 1) {
+      var runner = document.createElement("span");
+      runner.className = "spectrum-bar__runner";
+      runner.setAttribute("aria-hidden", "true");
+      specBar.appendChild(runner);
+      var specNodes = specBar.querySelectorAll(".spectrum-bar__nodes span");
+      specBands.forEach(function (band, i) {
+        band.addEventListener("mouseenter", function () {
+          runner.style.setProperty("--pos", String(i / (specBands.length - 1)));
+          runner.style.borderColor = getComputedStyle(band).borderTopColor;
+          specBar.classList.add("is-tracking");
+          specNodes.forEach(function (n, j) { n.classList.toggle("is-hot", i === j); });
+        });
+        band.addEventListener("mouseleave", function () {
+          specBar.classList.remove("is-tracking");
+          specNodes.forEach(function (n) { n.classList.remove("is-hot"); });
+        });
+      });
+    }
+  }
+
+  /* ===============================================================
      2 · STICKY NAV
   =============================================================== */
   var toggle = document.getElementById("navToggle");
