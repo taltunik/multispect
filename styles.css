@@ -69,7 +69,8 @@
   --bg:           var(--paper-cool);
   --text:         #1b2630;
   --text-soft:    #4a5662;
-  --text-faint:   #76828d;
+  /* ≥4.5:1 (WCAG AA) even on the warmest light tone (#ece2d5) */
+  --text-faint:   #566270;
   --line:         rgba(27,38,48,.14);
   --line-strong:  rgba(27,38,48,.26);
   --card-bg:      rgba(255,255,255,.55);
@@ -133,7 +134,8 @@ img{max-width:100%;display:block;}
 .wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut);}
 .wrap--narrow{max-width:var(--maxw-narrow);}
 
-.section{position:relative;padding-block:var(--sec-pad);z-index:1;}
+.section{position:relative;padding-block:var(--sec-pad);z-index:1;
+  scroll-margin-top:.75rem; /* + html scroll-padding-top(--nav-h): anchors land clear of the sticky nav */}
 
 .kicker{
   font-size:var(--fs-kicker);font-weight:600;letter-spacing:.22em;text-transform:uppercase;
@@ -306,6 +308,12 @@ strong{font-weight:600;color:var(--text);}
 .stat__num{font-family:var(--font-display);font-size:clamp(2.6rem,2rem+4vw,5rem);line-height:.9;color:var(--spec-4);display:block;}
 .stat__cap{font-size:.96rem;color:var(--text-soft);margin-top:1rem;max-width:40ch;}
 
+/* glyphs — thin-stroke icon system, tinted by each card's spectrum band */
+.card,.pillar,.principle,.benefit,.altitude,.study{position:relative;}
+.glyph{position:absolute;top:clamp(1.3rem,2.4vw,1.9rem);right:clamp(1.3rem,2.4vw,1.9rem);
+  width:26px;height:26px;color:var(--band,var(--spec-3));opacity:.9;pointer-events:none;}
+.glyph svg{width:100%;height:100%;display:block;}
+
 /* -----------------------------------------------------------------
    9 · SECTION-SPECIFIC
 ----------------------------------------------------------------- */
@@ -367,6 +375,10 @@ strong{font-weight:600;color:var(--text);}
 .study{border:1px solid var(--card-line);border-radius:var(--radius);padding:clamp(1.3rem,2.4vw,1.9rem);
   border-top:3px solid var(--band);background:var(--card-bg);}
 .study__tag{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--band);font-weight:600;}
+/* spectrum position per study — echoes the case-study marker */
+.study__pos{position:absolute;top:1.7rem;right:1.5rem;width:clamp(80px,9vw,130px);}
+.study__pos .spectrum-bar--mini{width:100%;}
+.study__pos .spectrum-bar__marker{border-color:var(--band);}
 .study h3{font-size:1.16rem;margin:.6rem 0 .4rem;}
 .study p{margin:0;color:var(--text-soft);font-size:.94rem;}
 
@@ -445,14 +457,20 @@ strong{font-weight:600;color:var(--text);}
 .case__cols h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--spec-4);margin:0 0 .6rem;}
 .case__cols p{margin:0;color:var(--text-soft);font-size:.96rem;}
 
-/* press placeholder (correctly proportioned horizontal news photo) */
+/* press figure — 16:9 frame; shows the photo when present, otherwise an
+   on-brand editorial placeholder (quiet ground, thin plate mark, caption) */
 .press{margin:0;}
-.press__ph{aspect-ratio:16/9;border-radius:var(--radius);border:1px dashed var(--line-strong);
-  background:
-    repeating-linear-gradient(45deg,transparent,transparent 14px,color-mix(in srgb,var(--text-faint) 8%,transparent) 14px,color-mix(in srgb,var(--text-faint) 8%,transparent) 15px),
-    color-mix(in srgb,var(--ink-900) 22%, transparent);
-  display:flex;align-items:center;justify-content:center;}
-.press__ph::after{content:"PRESS IMAGE";font-size:.74rem;letter-spacing:.24em;color:var(--text-faint);}
+.press__frame{position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--card-line);background:var(--card-bg);}
+.press__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .4s var(--ease);}
+.press__img.is-loaded{opacity:1;}
+.press__ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.75rem;text-align:center;padding:1.5rem;
+  background:radial-gradient(120% 95% at 50% 0%, color-mix(in srgb,var(--spec-2) 8%, transparent), transparent 65%);}
+.press__ph svg{width:40px;height:40px;color:var(--text-faint);opacity:.85;}
+.press__ph-rule{width:44px;height:2px;border-radius:2px;background:var(--spectrum);opacity:.6;}
+.press__ph-label{font-size:.72rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--text-soft);}
 .press figcaption{font-size:.74rem;letter-spacing:.04em;color:var(--text-faint);margin-top:.6rem;}
 
 /* — Pillars / principles / benefits — */
@@ -497,12 +515,14 @@ strong{font-weight:600;color:var(--text);}
 
 /* -----------------------------------------------------------------
    11 · SCROLL REVEAL
+   Hidden state only applies once main.js has tagged <html class="js">,
+   so content is never lost if scripts fail to run.
 ----------------------------------------------------------------- */
-[data-reveal]{opacity:0;transform:translateY(22px);
+.js [data-reveal]{opacity:0;transform:translateY(22px);
   transition:opacity .55s var(--ease),transform .55s var(--ease);will-change:opacity,transform;}
-[data-reveal].is-in{opacity:1;transform:none;}
+.js [data-reveal].is-in{opacity:1;transform:none;}
 /* gentle stagger for grouped children */
-.cols [data-reveal].is-in,.bands .band.is-in{transition-delay:calc(var(--stagger,0)*70ms);}
+.js .cols [data-reveal].is-in,.js .bands .band.is-in{transition-delay:calc(var(--stagger,0)*70ms);}
 
 /* -----------------------------------------------------------------
    12 · RESPONSIVE

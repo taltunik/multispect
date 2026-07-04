@@ -9,7 +9,11 @@
 (function () {
   "use strict";
 
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Reveal-hiding is gated on this class so content stays visible if JS never runs.
+  document.documentElement.classList.add("js");
+
+  var motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduceMotion = motionQuery.matches;
 
   /* ---------------------------------------------------------------
      BACKGROUND TONES — one per section id.
@@ -52,22 +56,73 @@
     });
   });
 
-  if (reduceMotion) {
-    reveals.forEach(function (el) { el.classList.add("is-in"); });
-  } else if ("IntersectionObserver" in window) {
-    var revealObs = new IntersectionObserver(function (entries) {
+  var revealObs = null;
+
+  function reveal(el) {
+    el.classList.add("is-in");
+    if (revealObs) revealObs.unobserve(el);
+  }
+
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    revealObs = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          e.target.classList.add("is-in");
-          revealObs.unobserve(e.target);
-        }
+        if (e.isIntersecting) reveal(e.target);
       });
     }, { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
     reveals.forEach(function (el) { revealObs.observe(el); });
   } else {
-    // very old browsers: just show everything
-    reveals.forEach(function (el) { el.classList.add("is-in"); });
+    // reduced motion / very old browsers: just show everything
+    reveals.forEach(reveal);
   }
+
+  // If the preference flips to "reduce" mid-session, show everything at once.
+  if (motionQuery.addEventListener) {
+    motionQuery.addEventListener("change", function (e) {
+      if (e.matches) reveals.forEach(reveal);
+    });
+  }
+
+  /* — Proactive reveal —
+     The observer alone is not enough when the page JUMPS instead of
+     scrolling: anchor navigation (nav clicks, hashchange, loading a
+     #fragment URL, bfcache restore) can land the viewport on a section
+     whose reveal never fired, leaving it blank. So: */
+
+  // (a) anything already inside the viewport is revealed immediately …
+  function revealInView() {
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    reveals.forEach(function (el) {
+      if (el.classList.contains("is-in")) return;
+      var r = el.getBoundingClientRect();
+      if (r.top < vh && r.bottom > 0) reveal(el);
+    });
+  }
+
+  // (b) … and the target of an anchor jump is revealed in full, so it is
+  // readable the moment the viewport lands on it.
+  function revealHashTarget(hash) {
+    if (!hash || hash.length < 2) return;
+    var target;
+    try { target = document.getElementById(decodeURIComponent(hash.slice(1))); } catch (err) { return; }
+    if (!target) return;
+    if (target.hasAttribute("data-reveal")) reveal(target);
+    target.querySelectorAll("[data-reveal]").forEach(reveal);
+  }
+
+  window.addEventListener("load", function () {
+    revealHashTarget(location.hash);
+    revealInView();
+  });
+  window.addEventListener("pageshow", revealInView);
+  window.addEventListener("hashchange", function () {
+    revealHashTarget(location.hash);
+    revealInView();
+  });
+  // catch in-page anchor clicks (nav, skip-link, brand) before the scroll starts
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a) revealHashTarget(a.getAttribute("href"));
+  });
 
   /* ===============================================================
      2 · STICKY NAV
