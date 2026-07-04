@@ -308,6 +308,12 @@ strong{font-weight:600;color:var(--text);}
 .stat__num{font-family:var(--font-display);font-size:clamp(2.6rem,2rem+4vw,5rem);line-height:.9;color:var(--spec-4);display:block;}
 .stat__cap{font-size:.96rem;color:var(--text-soft);margin-top:1rem;max-width:40ch;}
 
+/* glyphs — thin-stroke icon system, tinted by each card's spectrum band */
+.card,.pillar,.principle,.benefit,.altitude,.study{position:relative;}
+.glyph{position:absolute;top:clamp(1.3rem,2.4vw,1.9rem);right:clamp(1.3rem,2.4vw,1.9rem);
+  width:26px;height:26px;color:var(--band,var(--spec-3));opacity:.9;pointer-events:none;}
+.glyph svg{width:100%;height:100%;display:block;}
+
 /* -----------------------------------------------------------------
    9 · SECTION-SPECIFIC
 ----------------------------------------------------------------- */
@@ -369,6 +375,10 @@ strong{font-weight:600;color:var(--text);}
 .study{border:1px solid var(--card-line);border-radius:var(--radius);padding:clamp(1.3rem,2.4vw,1.9rem);
   border-top:3px solid var(--band);background:var(--card-bg);}
 .study__tag{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--band);font-weight:600;}
+/* spectrum position per study — echoes the case-study marker */
+.study__pos{position:absolute;top:1.7rem;right:1.5rem;width:clamp(80px,9vw,130px);}
+.study__pos .spectrum-bar--mini{width:100%;}
+.study__pos .spectrum-bar__marker{border-color:var(--band);}
 .study h3{font-size:1.16rem;margin:.6rem 0 .4rem;}
 .study p{margin:0;color:var(--text-soft);font-size:.94rem;}
 
