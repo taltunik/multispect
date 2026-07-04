@@ -104,15 +104,24 @@
               fill="none" stroke="var(--spec-2)" stroke-width="2" stroke-linejoin="round" />
             <polygon class="motif-poly-fill" points="120,70 250,40 360,110 340,210 220,250 100,190"
               fill="var(--spec-2)" opacity="0.06" />
+            <!-- inner structure — every voice ties back to the core -->
+            <g class="motif-spokes" stroke="var(--spec-2)" stroke-width="1.3" opacity="0.35">
+              <line x1="120" y1="70"  x2="232" y2="145" /><line x1="250" y1="40"  x2="232" y2="145" />
+              <line x1="360" y1="110" x2="232" y2="145" /><line x1="340" y1="210" x2="232" y2="145" />
+              <line x1="220" y1="250" x2="232" y2="145" /><line x1="100" y1="190" x2="232" y2="145" />
+            </g>
             <!-- vertex nodes -->
             <g fill="var(--spec-2)">
               <circle cx="120" cy="70" r="4" /><circle cx="250" cy="40" r="4" />
               <circle cx="360" cy="110" r="4" /><circle cx="340" cy="210" r="4" />
               <circle cx="220" cy="250" r="4" /><circle cx="100" cy="190" r="4" />
             </g>
-            <!-- the "current" marker dropping onto the spectrum -->
-            <line x1="230" y1="250" x2="230" y2="300" stroke="var(--spec-4)" stroke-width="2" stroke-dasharray="3 4" />
-            <circle cx="230" cy="303" r="7" fill="var(--spec-4)" />
+            <!-- the core node -->
+            <circle cx="232" cy="145" r="9.5" fill="none" stroke="var(--spec-2)" opacity="0.45" />
+            <circle cx="232" cy="145" r="5" fill="var(--spec-2)" />
+            <!-- the "current" — read from the core, dropping onto the spectrum -->
+            <line x1="232" y1="157" x2="232" y2="300" stroke="var(--spec-4)" stroke-width="2" stroke-dasharray="3 4" />
+            <circle cx="232" cy="303" r="7" fill="var(--spec-4)" />
           </svg>
           <figcaption id="motifcap">Polygon / AOR-01 — the brand mark sits on the spectrum · Illustrative</figcaption>
         </figure>
