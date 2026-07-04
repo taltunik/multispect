@@ -59,8 +59,12 @@
   var revealObs = null;
 
   function reveal(el) {
+    if (el.classList.contains("is-in")) return;
     el.classList.add("is-in");
     if (revealObs) revealObs.unobserve(el);
+    // once the entrance (incl. max stagger) is over, hand the element's
+    // transitions back to the hover styles (see CSS §11 .is-settled)
+    setTimeout(function () { el.classList.add("is-settled"); }, 900);
   }
 
   if (!reduceMotion && "IntersectionObserver" in window) {
